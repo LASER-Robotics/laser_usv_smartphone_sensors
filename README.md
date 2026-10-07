@@ -20,7 +20,7 @@ Por que essa separação: os comandos `termux-sensor` etc. só existem fora do p
 
 ## Installation
 
-Copiar os arquivos pro celular (via `adb`, do computador):
+Copiar os arquivos pro celular (via `adb`, do computador tem que rodar esses comandos na pasta dos arquivos):
 
 ```bash
 adb root
@@ -43,7 +43,7 @@ python sensor_server.py
 ```
 Mostra `[server] escutando em 0.0.0.0:8765`.
 
-Terminal 2, dentro do proot:
+Terminal 2, dentro do proot (deslize da borda esquerda da tela e escolha New session):
 
 ```bash
 proot-distro login ubuntu
@@ -52,7 +52,7 @@ python3 boat_sensor_node.py
 ```
 Mostra `Conectado ao sensor_server.`.
 
-Terminal 3, dentro do proot, pra conferir que está tudo publicando:
+Terminal 3, dentro do proot em outra New session, pra conferir que está tudo publicando:
 
 ```bash
 source /opt/ros/humble/setup.bash
