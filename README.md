@@ -13,8 +13,8 @@ Código que pega os sensores de um celular Android (via Termux:API) e publica em
 
 São dois arquivos, cada um rodando de um lado:
 
-- **`sensor_server.py`** roda no Termux nativo, fora do proot. Não é um nó ROS 2 — só chama `termux-sensor`, `termux-location` e `termux-battery-status` e manda os valores por um socket TCP na porta 8765.
-- **`boat_sensor_node.py`** roda dentro do proot. Esse sim é um nó ROS 2 de verdade (`rclpy`), aparece em `ros2 node list`. Ele se conecta no `sensor_server.py` pelo socket e publica os tópicos `/boat/*`.
+- **`sensor_server.py`** roda no Termux nativo, fora do proot. Não é um nó ROS 2 só chama `termux-sensor`, `termux-location` e `termux-battery-status` e manda os valores por um socket TCP na porta 8765.
+- **`boat_sensor_node.py`** roda dentro do proot. É um nó ROS 2, aparece em `ros2 node list`. Ele se conecta no `sensor_server.py` pelo socket e publica os tópicos `/boat/*`.
 
 Por que essa separação: os comandos `termux-sensor` etc. só existem fora do proot, e o ROS 2 só existe dentro dele. O proot isola o sistema de arquivos mas não a rede, então o socket local resolve a comunicação entre os dois lados.
 
@@ -78,4 +78,4 @@ ros2 topic echo /boat/imu
 | `/boat/gps/fix` | `sensor_msgs/NavSatFix` | latitude/longitude/altitude |
 | `/boat/battery_state` | `sensor_msgs/BatteryState` | estado da bateria |
 
-No emulador, Giroscópio, Proximidade, Luz, Temperatura e Umidade voltam com valor fixo (placeholder) — não é bug do código, é limitação do AVD. Dado real só sai testando no celular físico.
+No emulador, Giroscópio, Proximidade, Luz, Temperatura e Umidade voltam com valor fixo (placeholder) é limitação do AVD. Dado real só sai testando no celular físico.
